@@ -1,0 +1,43 @@
+# Made by scripts/stable-channel.sh in conn3xorg/conn3x from the cask of this release. DO NOT EDIT.
+cask "conn3x@stable" do
+  version "0.12.0"
+
+  on_macos do
+    on_arm do
+      sha256 "9138faa607c53830fd00f616fcaf50e1a4fda98dea0d3823769bc5b7f10dbd2d"
+      url "https://github.com/conn3xorg/conn3x/releases/download/v#{version}/conn3x_#{version}_darwin_arm64.tar.gz"
+    end
+    on_intel do
+      sha256 "6eebfa8a291b7573a3231d35f6b4ad91f2d5c24e1baea2ffa5805b3b3bf6a60e"
+      url "https://github.com/conn3xorg/conn3x/releases/download/v#{version}/conn3x_#{version}_darwin_amd64.tar.gz"
+    end
+  end
+  on_linux do
+    on_arm do
+      sha256 "87403d1e2a360d0c12202e64e7a1a698d4468ba604d80f9599430df49c0f469f"
+      url "https://github.com/conn3xorg/conn3x/releases/download/v#{version}/conn3x_#{version}_linux_arm64.tar.gz"
+    end
+    on_intel do
+      sha256 "71eb98bb727c25c065597486c12a40ba68375fa2802d68a028ee793a420cbcbe"
+      url "https://github.com/conn3xorg/conn3x/releases/download/v#{version}/conn3x_#{version}_linux_amd64.tar.gz"
+    end
+  end
+
+  name "conn3x"
+  desc "One plan for your cloud and the servers it creates."
+  homepage "https://conn3x.org"
+
+  livecheck do
+    skip "Auto-generated on release."
+  end
+
+  conflicts_with cask: "conn3x"
+
+  binary "conn3x"
+
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/conn3x"]
+  end
+
+  zap :not_required
+end
